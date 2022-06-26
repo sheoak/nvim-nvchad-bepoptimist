@@ -19,13 +19,14 @@ M.plugins = {
 
    user = require "custom.plugins",
 
-   override = {
-     ["nvim-telescope/telescope.nvim"] = override.telescope,
-     ["nvim-treesitter/nvim-treesitter"] = override.treesitter,
-     ["kyazdani42/nvim-tree.lua"] = override.nvimtree,
-     ["akinsho/bufferline.nvim"] = override.bufferline,
-     ["lewis6991/gitsigns.nvim"] = override.gitsigns,
-   },
+  override = {
+    ["windwp/nvim-autopairs"] = override.autopairs,
+    -- ["nvim-telescope/telescope.nvim"] = override.telescope,
+    ["nvim-treesitter/nvim-treesitter"] = override.treesitter,
+    ["kyazdani42/nvim-tree.lua"] = override.nvimtree,
+    ["akinsho/bufferline.nvim"] = override.bufferline,
+    ["lewis6991/gitsigns.nvim"] = override.gitsigns,
+  },
 
    remove = {
      -- "folke/which-key.nvim",

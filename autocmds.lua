@@ -4,12 +4,12 @@ local autocmd = vim.api.nvim_create_autocmd
 -- auto padding for kitty terminal
 autocmd("VimEnter", {
     callback = function()
-        vim.cmd "silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 margin=0"
+        -- vim.cmd "silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 margin=0"
     end,
 })
 autocmd("VimLeave", {
     callback = function()
-        vim.cmd "silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=20 margin=10"
+        -- vim.cmd "silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=20 margin=10"
     end,
 })
 

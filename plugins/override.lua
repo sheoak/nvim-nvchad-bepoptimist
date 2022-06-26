@@ -1,31 +1,11 @@
 local M = {}
 
--- M.telescope = {
---   extensions = {
---     fzf = {
---       fuzzy = true,
---       override_generic_sorter = true,
---       override_file_sorter = true,
---       case_mode = "smart_case",
---     },
---     ["session-lens"] = {
---        path_display = {'shorten'},
---     },
---     project = {
---       base_dirs = {
---         {path = '~/.config/', max_depth = 1},
---         {path = '~/dev/', max_depth = 1},
---       },
---       -- hidden_files = true, -- default: false
---       -- theme = "dropdown",
---     },
---     defaults = {
---       dynamic_preview_title = false,
---       results_title = false,
---       prompt_title = false,
---     },
---   },
--- }
+M.autopairs = {
+  map_cr = true,
+  map_c_h = true,
+  map_c_w = true,
+  check_ts = true,
+}
 
 M.treesitter = {
   matchup = {
@@ -53,7 +33,7 @@ M.nvimtree = {
     enable = true,
   },
   view = {
-    side = "right",
+    -- side = "right",
     width = 20,
   },
 }
@@ -109,9 +89,12 @@ M.gitsigns = {
       return '<Ignore>'
     end, {expr=true})
 
+    -- TODO: move to mappings?
+
     -- Actions
-    map({'n', 'v'}, '’a', ':Gitsigns stage_hunk<CR>')
-    map({'n', 'v'}, '’u', ':Gitsigns reset_hunk<CR>')
+    map({'n', 'v'}, "’a", ":Gitsigns stage_hunk<CR>")
+    map({'n', 'v'}, "’u", ":Gitsigns reset_hunk<CR>")
+    -- fixme, taken
     map('n', '’z', gs.undo_stage_hunk)
     map('n', '’v', gs.preview_hunk)
     map('n', '’A', gs.stage_buffer)

@@ -5,24 +5,12 @@ return {
    ["sheoak/vim-bepoptimist"] = {},
    ["sheoak/vim-unimpaired-extras"] = {},
 
-   -- session manager
-   -- ["Shatur/neovim-session-manager"] = {
-   --     requires = {
-   --         {"nvim-lua/plenary.nvim"},
-   --     },
-   --     -- FIXME
-   --     -- config = function()
-   --     --     local present, session = pcall(require, "neovim-session-manager")
-
-   --     --     if not present then
-   --     --         print('Cannot find session manager')
-   --     --         return
-   --     --     end
-   --     --     session.setup({
-   --     --         autoload_mode = require('session_manager.config').AutoloadMode.Disabled
-   --     --     })
-   --     -- end
-   -- },
+   ["nvim-telescope/telescope.nvim"] = {
+      module = "telescope",
+      -- config = function()
+      --     require("custom.plugins.configs.telescope")
+      -- end,
+   },
 
    ["tpope/vim-dispatch"] = {},
 
@@ -32,6 +20,24 @@ return {
 
    ["nvim-telescope/telescope-project.nvim"] = {
        cmd = "Telescope",
+   },
+
+   ["pwntester/octo.nvim"] = {
+       -- requires = {
+       --     'nvim-lua/plenary.nvim',
+       --     'nvim-telescope/telescope.nvim',
+       --     'kyazdani42/nvim-web-devicons',
+       -- },
+       cmd = 'Octo',
+       config = function ()
+           local present, octo = pcall(require, "octo")
+
+           if not present then
+               return
+           end
+
+           octo.setup({})
+       end
    },
 
    ["rmagatti/auto-session"] = {
@@ -44,7 +50,7 @@ return {
    },
 
    ["rmagatti/session-lens"] = {
-       -- requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+       requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
        cmd = "SearchSession",
        config = function()
            require('session-lens').setup {
@@ -177,11 +183,11 @@ return {
        end,
    },
 
-   ["tpope/vim-commentary"] = {
-       setup = function()
-           require("core.lazy_load").on_file_open "vim-commentary"
-       end,
-   },
+  -- ["tpope/vim-commentary"] = {
+   --     setup = function()
+   --         require("core.lazy_load").on_file_open "vim-commentary"
+   --     end,
+   -- },
 
    ["tpope/vim-unimpaired"] = {},
 
