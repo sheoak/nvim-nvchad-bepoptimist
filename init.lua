@@ -1,7 +1,7 @@
-require "custom/settings"
-require "custom/autocommand"
-require "custom/mappings"
+require "custom.settings"
+require "custom.autocmds"
 
+-- TODO: restore system of private files
 -- Load private files (bookmarks, custom alias…)
 -- use runtimepath so that you can have plugin/ after/… folders
 -- if (!empty($DOTFILES_PRIVATE))

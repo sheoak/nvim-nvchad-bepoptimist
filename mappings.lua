@@ -1,220 +1,192 @@
+-- TODO: migrate bepoptimist
 
-vim.api.nvim_exec([[
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Custom mappings
-" See bepotimist for homerow related mappings (tsrn)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+local M = {}
 
-" ----------------------------------------------------------------------------
-" Neovim built-in
-" ----------------------------------------------------------------------------
-" Don't use Ex mode, use Q for formatting
-noremap Q gq
-" don't override register when pasting over
-xnoremap p pgvy
-" page up/down
-noremap <BS> <PageUp>
-noremap <Space> <PageDown>
-" terminal escape instead of C-\ C-n
-tnoremap <C-g> <C-\><C-n>
-tnoremap <C-d> <C-\><C-n>:bd!<CR>
+-- TODO: override instead
+M.bepo = require "custom.mappings-bepo"
 
-" ----------------------------------------------------------------------------
-" Plugin pre-configuration for bepoptimist
-" It needs to be in the main configuration because of loading priorities
-" ----------------------------------------------------------------------------
-let g:surround_no_mappings = 1
-let g:ranger_map_keys = 0
-let g:bexec_no_mappings = 1
-let g:bclose_no_plugin_maps = 1
-let g:nvimgdb_disable_start_keymaps = 1
-let g:user_emmet_leader_key='<C-y>'
-let g:jedi#documentation_command = 'gh'   " vim Jedi needs to use the same key
-let g:jedi#completions_command = ""
-let g:jedi#rename_command = ''
-let g:jedi#usages_command = ''
-let g:jedi#goto_assignments_command = ''
-let g:jedi#goto_command = ''
-let g:table_mode_map_prefix = ',\|'
-let g:sneak#target_labels = "auiectsrnovdl"
-" let deoplete handle jedi
-let g:jedi#completions_enabled = 0
-" hack for sneak, to avoid remapping
-nmap , <Nop>
+M.leap = {
+   n = {
+      ["k"] = {"<Plug>(leap-forward)", "Leap Forward"},
+      ["K"] = {"<Plug>(leap-backward)", "Leap Backward"},
+      ["è"] = {"<Plug>(leap-forward-x)", "Leap Forward, inclusive"},
+      ["È"] = {"<Plug>(leap-backward-x)", "Leap Backward, inclusive"},
+      ["gk"] = {"<Plug>(leap-cross-window)", "Leap Forward"},
+   },
+   v = {
+      ["k"] = {"<Plug>(leap-forward)", "Leap Forward"},
+      ["K"] = {"<Plug>(leap-backward)", "Leap Backward"},
+      ["è"] = {"<Plug>(leap-forward-x)", "Leap Forward, inclusive"},
+      ["È"] = {"<Plug>(leap-backward-x)", "Leap Backward, inclusive"},
+   },
+   o = {
+      ["k"] = {"<Plug>(leap-forward)", "Leap Forward"},
+      ["K"] = {"<Plug>(leap-backward)", "Leap Backward"},
+      ["è"] = {"<Plug>(leap-forward-x)", "Leap Forward, inclusive"},
+      ["È"] = {"<Plug>(leap-backward-x)", "Leap Backward, inclusive"},
+   },
+}
 
-" -----------------------------------------------------------------------------
-" Common actions (no plugin)
-" -----------------------------------------------------------------------------
-nmap ,s :w<CR>
-nmap ,S :w!<CR>
-nmap ,w :saveas<space>
-nmap ,W :saveas!<space>
-nmap ,q :q<CR>
-nmap ,Q :qa<CR>
-nmap ,x :x<CR>
-nmap ,X :x!<CR>
-nmap ,u :bunload<CR>
-nmap ,U :bunload!<CR>
-nmap ,d :bdelete<CR>
-nmap ,D :bdelete!<CR>
-nmap ,iv :source ~/.config/nvim/init.vim<CR>
-nmap ,is :source %<CR>
+-- BEPO
+M.surround = {
+   n = {
+      ["du"]  = {"<Plug>Dsurround", "Surround Delete"},
+      ["cu"]  = {"<Plug>Csurround", "Surround Replace"},
+      ["cU"]  = {"<Plug>CSurround", "Surround Replace (inc.)"},
+      ["yu"]  = {"<Plug>Ysurround", "Surround Yank"},
+      ["yU"]  = {"<Plug>YSurround", "Surround Yank (inc.)"},
+      ["yuu"] = {"<Plug>Yssurround", "Surround Yank ?"},
+      ["yuU"] = {"<Plug>YSsurround", "Surround Yank ?"},
+   },
+   x = {
+      ["u"] = { "<Plug>VSurround", "Add around"},
+      ["U"] = { "<Plug>VgSurround", "Add around, linewise" },
+   }
+}
 
+-- END BEPO
 
-" -----------------------------------------------------------------------------
-" Plugins
-" -----------------------------------------------------------------------------
+M.disabled = {
+  n = {
+     ["<C-s>"] = "",
+     ["<C-n>"] = "", -- nerdtree toggle
+     ["gb"] = "", -- comment toggle
+     ["<leader>n"] = "",
+     ["<leader>x"] = "", -- close buffer
+     ["<leader>pt"] = "", -- pick hidden term
+     ["<leader>/"] = "", -- toggle comment
+  },
+  x = {
+     ["gb"] = "", -- comment toggle
+  }
+}
 
-" Completion (<tab>, <c-space>)
-" -----------------------------------------------------------------------------
+M.treesitter = {
+   n = {
+      ["<leader>cu"] = { "<cmd> TSCaptureUnderCursor <CR>", "  find media" },
+   },
+}
 
-" Neosnippets
-" imap <C-space> <Plug>(neosnippet_expand_or_jump)
-" smap <C-space> <Plug>(neosnippet_expand_or_jump)
-" xmap <C-space> <Plug>(neosnippet_expand_target)
+M.neoclip = {
+   n = {
+      ['""'] = {
+         -- FIXME
+         "<cmd> lua require('telescope').extensions.neoclip.default()<CR>",
+         "Neoclip",
+      },
+   },
+}
 
-" SuperTab like snippets behavior.
-" imap <expr><TAB>
-"  \ pumvisible() ? "\<C-n>" :
-"  \ neosnippet#expandable_or_jumpable() ?
-"  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+-- Startify <leader>s…
+M.startify = {
+   n = {
+      ["<leader><leader>"] = { "<cmd> Startify<CR>", "Startify" },
+      ["<leader>s"] = { "", "Startify…"},
+      ["<leader>ss"] = { "<cmd> SSave<CR>", "Save Session" },
+      ["<leader>sl"] = { "<cmd> SLoad<CR>", "Load Session" },
+      ["<leader>sc"] = { "<cmd> SClose<CR>", "Close Session" },
+      ["<leader>sd"] = { "<cmd> SDelete<CR>", "Delete Session" },
+   },
+}
 
-" smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+-- Packer <leader>p…
+M.packer = {
+   n = {
+      ["<leader>p"] = { "", "Packer…" },
+      ["<leader>pi"] = { "<cmd> PackerInstall<CR>", "Packer Install" },
+      ["<leader>pu"] = { "<cmd> PackerUpdate<CR>", "Packer Update" },
+      ["<leader>ps"] = { "<cmd> PackerSync<CR>", "Packer Sync" },
+      ["<leader>pS"] = { "<cmd> PackerStatus<CR>", "Packer Status" },
+      ["<leader>pc"] = { "<cmd> PackerClean<CR>", "Packer Clean" },
+      ["<leader>pm"] = { "<cmd> PackerCompile<CR>", "Packer Compile" },
+      ["<leader>pp"] = { "<cmd> PackerProfile<CR>", "Packer Profile" },
+      -- FIXME, use telescope or fzf?
+      -- ["<leader>ph"] = { "", "Packer Snapshot…" },
+      -- ["<leader>phs"] = { "<cmd> PackerSnapshot ", "Packer Snapshot" },
+      -- ["<leader>phd"] = { "<cmd> PackerSnapshotDelete ", "Packer Snapshot Delete" },
+      -- ["<leader>phr"] = { "<cmd> PackerSnapshotRollaback ", "Packer Snapshot Rollback" },
+   },
+}
 
-"  Formatting
-" -----------------------------------------------------------------------------
+M.nvim = {
+   n = {
+      ["<BS>"] = {"<PageUp>", "Page Up"},
+      ["<Space>"] = {"<PageDown>", "Page Down"},
+      ["gp"] = { "`[v`]" , "Select last pasted text"},
+      ["Y"] = { "y$", "Yank line"},
+   },
+   x = {
+      ["p"] = { "pgvy", "Paste without override register" }
+   },
+   v = {
+      ["Q"] = { "gq", "Wrap Text" },
+   },
+}
 
-" Insert mode mapping for completion
+M.files = {
+   n = {
+      [",s"] = {"<cmd> w<CR>", "Save"},
+      [",S"] = {"<cmd> w!<CR>", "Save (force)"},
+      [",w"] = {"<cmd> saveas<space>", "Save as"},
+      [",W"] = {"<cmd> saveas!<space>", "Save as (force)"},
+      [",q"] = {"<cmd> q<CR>", "Quit"},
+      [",Q"] = {"<cmd> qa<CR>", "Quit All"},
+      [",x"] = {"<cmd> x<CR>", "Save and Quit"},
+      [",X"] = {"<cmd> x!<CR>", "Save and Quit (force)"},
+      [",u"] = {"<cmd> bunload<CR>", "Unload Buffer"},
+      [",U"] = {"<cmd> bunload!<CR>", "Unload Buffer (force)"},
+      [",d"] = {"<cmd> bdelete<CR>", "Delete Buffer"},
+      [",D"] = {"<cmd> bdelete!<CR>", "Delete Buffer (force)"},
+   }
+}
 
-" Rewrite some vim maps in insert mode, not that usefull anyway if you know 
-" how to use vim in normal mode properly:
-inoremap <C-j> <C-x><C-]>
-inoremap <C-o> <C-x><C-o>
+M.ui = {
+   n = {
+      [",z"] = {"<cmd> ZenMode<CR>", "ZenMode Toggle"},
+   }
+}
 
-" imap <c-k> <plug>(fzf-complete-word)
-" imap <c-l> <plug>(fzf-complete-line)
-" inoremap <expr> <c-f> fzf#vim#complete#path('ag --hidden -l -g ""')
+M.git = {
+   n = {
+      ["’<BS>"] = {"<cmd> GitTimeLapse<CR>", "Timelapse"},
+   }
+}
 
-" Global line completion (not just open buffers. ripgrep required.)
-" TODO: add with ,l and ,L in normal mode
-" inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
-"             \ 'prefix': '^.*$',
-"             \ 'source': 'rg -n ^ --color always',
-"             \ 'options': '--ansi --delimiter : --nth 3..',
-"             \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
+M.colors = {
+   n = {
+      ["<leader>cR"] = { "<cmd> ConvertColorTo rgb<CR>", "Convert to RGB"},
+      ["<leader>cA"] = { "<cmd> ConvertColorTo rgba<CR>", "Convert to RGBA"},
+      ["<leader>cH"] = { "<cmd> ConvertColorTo hex<CR>", "Convert to #hex"},
+      ["<leader>cr"] = { "<cmd> VCoolIns r<CR>", "Color Picker RGB"},
+      ["<leader>ca"] = { "<cmd> VCoolIns ra<CR>", "Color Picker RGBA"},
+      ["<leader>ch"] = { "<cmd> VCoolor<CR>", "Color Picker #hex"},
+   }
+}
 
+-- Pytest <leader>t…
+-- TODO: migrate to Dap
+M.pytest = {
+   n = {
+      ["<leader>tt"] = { "<cmd> Pytest function<CR>", "Test Function"},
+      ["<leader>tf"] = { "<cmd> Pytest file<CR>", "Test File"},
+      ["<leader>tp"] = { "<cmd> Pytest project<CR>", "Test Project"},
+      ["<leader>ts"] = { "<cmd> Pytest session<CR>", "Test Session"},
+      ["<leader>tx"] = { "<cmd> Pytest fails<CR>", "Show Fails Tests"},
+      ["<leader>te"] = { "<cmd> Pytest error<CR>", "Show Error"},
+      ["<leader>td"] = { "<cmd> Pytest file --pdb<CR>", "Pytest file with pdb"},
+      ["<leader>tB"] = { "<cmd> Pytest file -s<CR>", "Pytest file to breakpoint"},
+      ["<leader>tb"] = { "<cmd> opytest.set_trace()<ESC>", "Set trace"},
+   }
+}
 
-" Executing (mostly leader key)
-" -----------------------------------------------------------------------------
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-            \ | wincmd p | diffthis
+-- TODO: remake insert maps with C-l
+-- inoremap <C-j> <C-x><C-]>
+-- inoremap <C-o> <C-x><C-o>
 
-" ALE
-" nmap <leader>ad <Plug>(ale_detail)
-" nmap <leader>af <Plug>(ale_fix)
-" css colors insert/convert via plugins
-nmap <leader>cA :ConvertColorTo rgba<CR>
-nmap <leader>ca :VCoolIns ra<CR>
-nmap <leader>cH :ConvertColorTo hex<CR>
-nmap <leader>ch :VCoolor<CR>
-nmap <leader>cR :ConvertColorTo rgb<CR>
-nmap <leader>cr :VCoolIns r<CR>
-nnoremap <leader>do :DiffOrig<CR>
-" Order all css properties
-nnoremap <leader>cs :<C-u>g/{/ .+1,/}/-1 sort<CR>
-" nmap <leader>f :Prettier<CR>
-nmap <leader>m :make<CR>
-nmap <leader>pc :PlugClean<CR>
-nmap <leader>pd :PlugDiff<CR>
-nmap <leader>pi :PlugInstall<CR>
-nmap <leader>pI :w<CR>:source ~/.config/nvim/init.vim<CR>:PlugInstall<CR>
-nmap <leader>p <Nop>
-nmap <leader>ps :PlugStatus<CR>
-nmap <leader>pu :PlugUpdate<CR>
-nmap <leader>pU :PlugUpgrade<CR>
-nmap <leader>s <Nop>
-nmap <leader>tp :!pytest<CR>
-nmap <leader>tt :!tox<CR>
-" Bexec
-nmap <leader>X :call bexec#Live()<CR>
-nmap <leader>x :call bexec#Normal()<CR>
-vmap <leader>x :call bexec#Visual()<CR>
-" Clean dirty white space (EOL)
-nnoremap <leader><space> :silent! %s/\s\+$//<CR>
-" Forgotten unbreakable spaces… for French only
-" TODO: operator cleaner?
-nnoremap <leader>  :%s/\(\S\) \([:;?!]\)/\1 \2/g<CR>
+-- Repeat on all selected lines
+--  vmap . :normal .
 
-" Misc.
-" -----------------------------------------------------------------------------
+-- trouble
+-- nmap <silent> ,<space>d <cmd>call coc#rpc#request('fillDiagnostics', [bufnr('%')])<CR><cmd>Trouble loclist<CR>`
 
-" ranger
-nnoremap ,e :RangerWorkingDirectory<CR>
-nnoremap ,E :Ranger ~<CR>
-
-
-" vim-bookmarks
-nnoremap ms <Plug>BookmarkShowAll
-
-" Experiment
-" Repeat on all selected lines
-vmap . :normal .
-" shortcut to @: for bepo
-map @. @:
-" select last paste in visual mode
-" https://dalibornasevic.com/posts/43-12-vim-tips
-nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
-" to match C and D behavior
-nnoremap Y y$
-
-" pytest
-nnoremap ,tt :Pytest function<CR>
-nnoremap ,tf :Pytest file<CR>
-nnoremap ,tp :Pytest project<CR>
-nnoremap ,ts :Pytest session<CR>
-nnoremap ,tx :Pytest fails<CR>
-nnoremap ,te :Pytest error<CR>
-nnoremap ,td :Pytest file --pdb<CR>
-nnoremap ,tB :Pytest file -s<CR>
-nnoremap ,tb opytest.set_trace()<ESC>
-
-" pdb
-nnoremap ,<space>g :GdbStartPDB python -m pdb app.py<CR>
-
-" vim-which-key
-" https://github.com/liuchengxu/vim-which-key
-" let g:mapleader = "\,"
-" let g:maplocalleader = '\\'
-" nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
-" nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
-nnoremap ,<CR> :term<CR>i
-
-" startify
-nnoremap ;; :Startify<CR>
-nnoremap ,p <Nop>
-nnoremap ,ps :SSave<CR>
-nnoremap ,pc :SClose<CR>
-nnoremap ,pd :SDelete<CR>
-nnoremap ,pl :SLoad<CR>
-
-" startify example:
-" nnoremap ,pb :SLoad mysession<CR>
-
-" fugitive
-" cancel git hunk (diff)
-vmap <silent> u <esc>:Gdiff<cr>gv:diffget<cr><c-w><c-w>ZZ
-
-nnoremap <CR><CR> :cn<CR>
-
-nnoremap <CR>u :CocList snippets<CR>
-" nnoremap <CR>t gg/template<CR>vit<
-" nnoremap <CR>f gg^/function<CR>diwX:%s/props\.//gc<CR>
-" nnoremap <CR>i ^iAppIcon(icon="<Esc>wwi")<Esc>
-" nnoremap <CR>b ^iAppButton(icon="<Esc>wwi")<Esc>
-" nnoremap <CR>d ^f=a defineAsyncComponent(<Esc>f(X/)<CR>ni)<Esc>
-
-" nnoremap <CR>é xdt"i')<Esc>F"a$t('<Esc>:w<CR>:!npx vue-i18n-extract use-config<CR>
-" nnoremap <CR>É xdt"i')<Esc>F"a$t('<Esc>I:<Esc>:w<CR>:!npx vue-i18n-extract use-config<CR>
-" nnoremap <CR>è xDA') }}<Esc>BBi{{ $t('<Esc>:w<CR>:!npx vue-i18n-extract use-config<CR>
-" nnoremap <CR>È DA{{ $t('') }}
-]], false)
+return M

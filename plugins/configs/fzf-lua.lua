@@ -1,3 +1,8 @@
+local present, fzflua = pcall(require, "fzf-lua")
+
+if not present then
+   return
+end
 -- local actions = require "fzf-lua.actions"
 -- local config = require("fzf-lua.config")
 
@@ -66,7 +71,7 @@ function _G.ghPrs(opts)
   end)()
 end
 
-require('fzf-lua').setup {
+fzflua.setup {
   previewers = {
     builtin = {
       syntax          = true,         -- preview syntax highlight?
