@@ -243,7 +243,8 @@ M.files = {
       [",?"] = {"<cmd> Telescope help_tags<CR>", "Help"},
       [",@"] = {"<cmd> Telescope commands<CR>", "Commands"},
       -- [",~"] = {"<cmd> Telescope find_files ~<CR>", "Files"},
-      -- a, A
+      [",a"] = {"<cmd> only <CR>", "Only Window"},
+      [",A"] = {"<cmd> tabonly <CR>", "Only Tab"},
       [",b"] = {"<cmd> Telescope buffers<CR>", "Buffers"},
       [",c"] = {"<cmd> Telescope colorscheme<CR>", "Coloschemes"},
       [",d"] = {"<cmd> bdelete<CR>", "Delete Buffer"},
