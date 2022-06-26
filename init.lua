@@ -1,6 +1,8 @@
 require "custom.settings"
 require "custom.autocmds"
 
+-- require'telescope'.extensions.project.project{}
+
 -- TODO: restore system of private files
 -- Load private files (bookmarks, custom alias…)
 -- use runtimepath so that you can have plugin/ after/… folders

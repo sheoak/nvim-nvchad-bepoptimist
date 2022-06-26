@@ -15,7 +15,7 @@ local M = {}
 --     ["k"] = {"<Plug>Sneak_s", ""},
 --     ["K"] = {"<Plug>Sneak_S", ""},
 -- }
--- 
+--
 -- M.o = {
 --     ["à"] = {"<Plug>Sneak_t", ""},
 --     ["À"] = {"<Plug>Sneak_T", ""},
@@ -26,7 +26,7 @@ local M = {}
 --     ["k"] = {"<Plug>Sneak_s", ""},
 --     ["K"] = {"<Plug>Sneak_S", ""},
 -- }
--- 
+--
 -- M.x = {
 --     ["à"] = {"<Plug>Sneak_t", ""},
 --     ["À"] = {"<Plug>Sneak_T", ""},

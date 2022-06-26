@@ -5,30 +5,62 @@ return {
    ["sheoak/vim-bepoptimist"] = {},
    ["sheoak/vim-unimpaired-extras"] = {},
 
-   -- replace chad config
-   ["Shatur/neovim-session-manager"] = {
-       requires = {
-           {"nvim-lua/plenary.nvim"},
-       },
-       setup = function()
-           local present, session = pcall(require, "neovim-session-manager")
+   -- session manager
+   -- ["Shatur/neovim-session-manager"] = {
+   --     requires = {
+   --         {"nvim-lua/plenary.nvim"},
+   --     },
+   --     -- FIXME
+   --     -- config = function()
+   --     --     local present, session = pcall(require, "neovim-session-manager")
 
-           if not present then
-               print('Cannot find session manager')
-               return
-           end
-           session.setup({
-               autoload_mode = require('session_manager.config').AutoloadMode.Disabled
-           })
+   --     --     if not present then
+   --     --         print('Cannot find session manager')
+   --     --         return
+   --     --     end
+   --     --     session.setup({
+   --     --         autoload_mode = require('session_manager.config').AutoloadMode.Disabled
+   --     --     })
+   --     -- end
+   -- },
+
+   ["tpope/vim-dispatch"] = {},
+
+   ["nvim-telescope/telescope-fzf-native.nvim"] = {
+       run = "make",
+   },
+
+   ["nvim-telescope/telescope-project.nvim"] = {
+       cmd = "Telescope",
+   },
+
+   ["rmagatti/auto-session"] = {
+       config = function()
+           require('auto-session').setup {
+               log_level = 'info',
+               auto_session_suppress_dirs = {'~/', '~/Projects'}
+           }
        end
    },
+
+   ["rmagatti/session-lens"] = {
+       -- requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+       cmd = "SearchSession",
+       config = function()
+           require('session-lens').setup {
+               path_display = {'shorten'},
+           }
+       end
+   },
+
+   ["stevearc/dressing.nvim"] = {},
 
    -- ["nvim-telescope/telescope-ui-select.nvim"] = {},
 
    ["goolord/alpha-nvim"] = {
-       requires = {
-           {"Shatur/neovim-session-manager"},
-       },
+       -- requires = {
+       --     {"Shatur/neovim-session-manager"},
+       -- },
        disable = false,
        -- requires = { 'kyazdani42/nvim-web-devicons' },
        -- config = function ()
@@ -70,7 +102,9 @@ return {
    -- git
    ["tpope/vim-fugitive"] = {},
 
-   ["tpope/vim-rhubarb"] = {},
+   ["tpope/vim-rhubarb"] = {
+       requires = {"tpope/vim-fugitive"},
+   },
 
    ["junkblocker/git-time-lapse"] = {
        setup = function()

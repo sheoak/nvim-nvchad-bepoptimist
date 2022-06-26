@@ -1,72 +1,88 @@
 local M = {}
 
-M.telescope = {
-  -- extensions = {
-  --   ["ui-select"] = {
-  --     -- require("telescope.themes").get_dropdown {
-  --     --   -- even more opts
-  --     -- }
-  --   },
-  -- },
-  defaults = {
-    dynamic_preview_title = false,
-    results_title = false,
-    prompt_title = false,
+-- M.telescope = {
+--   extensions = {
+--     fzf = {
+--       fuzzy = true,
+--       override_generic_sorter = true,
+--       override_file_sorter = true,
+--       case_mode = "smart_case",
+--     },
+--     ["session-lens"] = {
+--        path_display = {'shorten'},
+--     },
+--     project = {
+--       base_dirs = {
+--         {path = '~/.config/', max_depth = 1},
+--         {path = '~/dev/', max_depth = 1},
+--       },
+--       -- hidden_files = true, -- default: false
+--       -- theme = "dropdown",
+--     },
+--     defaults = {
+--       dynamic_preview_title = false,
+--       results_title = false,
+--       prompt_title = false,
+--     },
+--   },
+-- }
+
+M.treesitter = {
+  matchup = {
+    -- mandatory, false will disable the whole extension
+    enable = true,
+  },
+  ensure_installed = {
+    "lua",
+    "html",
+    "css",
+    "javascript",
+    "typescript",
+    "bash",
+    "vue",
+    "markdown",
+    "python",
+    "scss",
+    "pug",
+    "json",
   },
 }
 
-M.treesitter = {
-   matchup = {
-      -- mandatory, false will disable the whole extension
-      enable = true,
-   },
-   ensure_installed = {
-      "lua",
-      "html",
-      "css",
-      "javascript",
-      "typescript",
-      "bash",
-      "vue",
-      "markdown",
-      "python",
-      "scss",
-      "pug",
-      "json",
-   },
-}
-
 M.nvimtree = {
-   git = {
-      enable = true,
-   },
-   view = {
-      side = "right",
-      width = 20,
-   },
+  git = {
+    enable = true,
+  },
+  view = {
+    side = "right",
+    width = 20,
+  },
 }
 
 M.bufferline = {
   options = {
-    tab_size = 18,
-    show_close_icon = false,
+    separator_style = "slant",
     show_buffer_close_icons = false,
     middle_mouse_command = "bdelete! %d",
-    diagnostics = "coc",
-    diagnostics_update_in_insert = true,
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
-      return "("..count..")"
-    end,
-    separator_style = "slant",
-    -- NOTE: this will be called a lot so don't do any heavy processing here
-    -- fixme
-    custom_filter = function(buf_number, buf_numbers)
+    custom_filter = function(buf_number)
       -- hide terms
       if string.find(vim.fn.bufname(buf_number), "zsh") ~= nil then
         return false
       end
       return true
     end,
+    custom_areas = {
+      right = function()
+        -- don't want the nvchad buttons
+      end
+    }
+    -- diagnostics = "coc",
+    -- diagnostics_update_in_insert = true,
+    -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+      --   return "("..count..")"
+      -- end,
+      -- FIXME
+      -- NOTE: this will be called a lot so don't do any heavy processing here
+      -- fixme
   }
 }
 
@@ -105,6 +121,5 @@ M.gitsigns = {
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
-
 
 return M
