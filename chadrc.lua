@@ -2,7 +2,8 @@ local override = require "custom.plugins.override"
 local M = {}
 
 M.ui = {
-  theme = "catppuccin",
+  -- theme = "catppuccin",
+  theme = "gruvchad",
 }
 
 -- FIXME
@@ -14,14 +15,18 @@ M.ui = {
 M.plugins = {
 
   -- see ui/ folder
-   options = {
-   },
+  options = {
+     lspconfig = {
+       setup_lspconf = "custom.plugins.lspconfig",
+    },
+  },
 
    user = require "custom.plugins",
 
   override = {
+    ["wbthomason/packer.nvim"] = override.packer,
     ["windwp/nvim-autopairs"] = override.autopairs,
-    -- ["nvim-telescope/telescope.nvim"] = override.telescope,
+    ["nvim-telescope/telescope.nvim"] = override.telescope,
     ["nvim-treesitter/nvim-treesitter"] = override.treesitter,
     ["kyazdani42/nvim-tree.lua"] = override.nvimtree,
     ["akinsho/bufferline.nvim"] = override.bufferline,
@@ -30,6 +35,7 @@ M.plugins = {
 
    remove = {
      -- "folke/which-key.nvim",
+     -- "NvChad/base46",
    },
  }
 

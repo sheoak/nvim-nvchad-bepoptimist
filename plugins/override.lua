@@ -1,5 +1,12 @@
 local M = {}
 
+M.packer = {
+  profile = {
+    enable = true,
+    threshold = 0.5,
+  },
+}
+
 M.autopairs = {
   map_cr = true,
   map_c_h = true,
@@ -103,6 +110,40 @@ M.gitsigns = {
     -- Text Objects
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
+}
+
+M.telescope = {
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
+    -- media_files = {
+    --   -- filetypes whitelist
+    --   -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+    --   filetypes = {"png", "webp", "jpg", "jpeg"},
+    --   find_cmd = "rg" -- find command (defaults to `fd`)
+    -- },
+    -- ["session-lens"] = {
+    --   path_display = {'shorten'},
+    -- },
+    -- -- project = {
+    -- --   base_dirs = {
+    -- --     {path = '~/.config/', max_depth = 1},
+    -- --     {path = '~/dev/', max_depth = 1},
+    -- --   },
+    -- --   -- hidden_files = true, -- default: false
+    -- --   -- theme = "dropdown",
+    -- -- },
+    -- FIXME
+    -- defaults = {
+    --   dynamic_preview_title = false,
+    --   results_title = false,
+    --   prompt_title = false,
+    -- },
+  },
 }
 
 return M

@@ -25,7 +25,7 @@ zenmode.setup {
     gitsigns = { enabled = false },
     kitty = {
       enabled = true,
-      font = "+4",
+      font = "+2",
     },
   },
 }

@@ -1,5 +1,7 @@
 -- TODO: migrate bepoptimist
 
+-- fixme: snippets are broken with bepo t/n
+
 local M = {}
 
 M.disabled = {
@@ -96,7 +98,6 @@ M.unimpaired = {
       ["»"] = {"]", "", opts = { noremap = false }},
    },
 }
-
 
 M.leap = {
    n = {
@@ -229,11 +230,11 @@ M.pytest = {
    }
 }
 
-
 -- ---------------------------------------------------------------------------
 -- COMMA (files and telescope)
 -- ---------------------------------------------------------------------------
-
+-- TODO:
+-- command! BufCurOnly execute '%bdelete|edit#|bdelete#'
 M.files = {
    n = {
       [",\""] = {"<cmd> Telescope registers<CR>", "Registers"},
@@ -276,6 +277,8 @@ M.files = {
       [",W"] = {"<cmd> saveas!<space>", "Save as (force)"},
       [",x"] = {"<cmd> x<CR>", "Save and Quit"},
       [",X"] = {"<cmd> x!<CR>", "Save and Quit (force)"},
+      -- TODO: use nvterm split
+      [",y"] = {"<cmd> Dispatch yarn <CR>", "Yarn Install"},
       [",z"] = {"<cmd> UndotreeToggle <CR>", "Undo Tree Toggle"},
       [",Z"] = {"<cmd> UndotreeFocus <CR>", "Undo Tree Focus"},
    }
@@ -289,10 +292,10 @@ M.git = {
    n = {
       ["’’"] =    {"<cmd> Telescope git_files<CR>", "Git Files"},
       ["’<BS>"] = {"<cmd> GitTimeLapse<CR>", "Timelapse"},
-      ["’?"] =    {"<cmd> Git blame<CR>", "Git Blame"},
+      ["’?"] =    {"<cmd> G blame<CR>", "Git Blame"},
       -- a
       ["’b"] =    {"<cmd> Telescope git_branches<CR>", "Telescope Git Branches"},
-      ["’c"] =    {"<cmd> Git commit -v -q<CR>", "Git Commit"},
+      ["’c"] =    {"<cmd> G commit -v -q<CR>", "Git Commit"},
       ["’d"] =    {"<cmd> Gvdiffsplit!<CR>", "Git Diff Split"},
       ["’E"] =    {"<cmd> Gedit :0<CR>", "Git Edit"},
       ["’e"] =    {"<cmd> Gedit<CR>", "Git Edit"},
@@ -306,14 +309,16 @@ M.git = {
       ["’gc"] =    {"<cmd> Octo pr checkout <CR>", "Github PR Checkout"},
       ["’gd"] =    {"<cmd> Octo pr diff <CR>", "Github PR Diff"},
       ["’gl"] =    {"<cmd> Octo pr list <CR>", "Github PR List"},
+      ["’gn"] =    {"<cmd> Octo pr create <CR>", "Github PR Create"},
       ["’go"] =    {"<cmd> Octo pr browser <CR>", "Github PR Browse"},
       ["’gr"] =    {"<cmd> Octo pr ready <CR>", "Github PR Ready"},
       ["’gR"] =    {"<cmd> Octo pr reload <CR>", "Github PR Reload"},
+      ["’gs"] =    {"<cmd> Octo pr search <CR>", "Github PR Search"},
       ["’gv"] =    {"<cmd> Octo pr checks <CR>", "Github PR Checks"},
 
       ["’i"] =    {"", "Github issues…"},
       ["’il"] =    {"<cmd> Octo issue list <CR>", "Github Issue List"},
-      ["’ic"] =    {"<cmd> Octo issue create <CR>", "Github Issue Create"},
+      ["’in"] =    {"<cmd> Octo issue create <CR>", "Github Issue Create"},
       ["’iq"] =    {"<cmd> Octo issue close <CR>", "Github Issue Close"},
       ["’io"] =    {"<cmd> Octo issue browser <CR>", "Github Issue Open"},
       ["’iR"] =    {"<cmd> Octo issue reload <CR>", "Github Issue Reload"},
@@ -321,17 +326,17 @@ M.git = {
 
       -- j
       -- k
-      ["’l"] =    {"<cmd> Git pull<CR>", "Git Pull"},
-      ["’L"] =    {"<cmd> Git! pull<CR>", "Git Pull Async"},
-      ["’m"] =    {"<cmd> Git merge<CR>", "Git Merge"},
+      ["’l"] =    {"<cmd> G pull<CR>", "Git Pull"},
+      ["’L"] =    {"<cmd> G! pull<CR>", "Git Pull Async"},
+      ["’m"] =    {"<cmd> G merge<CR>", "Git Merge"},
       ["’n"] =    {"<cmd> diffget //3<CR>", "Git Get Right"},
       ["’o"] =    {"<Plug>(git-messenger)", "Git Messenger"},
-      ["’p"] =    {"<cmd> Git push<CR>", "Git Push"},
-      ["’P"] =    {"<cmd> Git! push<CR>", "Git Push Async"},
+      ["’p"] =    {"<cmd> G push<CR>", "Git Push"},
+      ["’P"] =    {"<cmd> G! push<CR>", "Git Push Async"},
       -- q
-      ["’r"] =    {"<cmd> Git rebase<CR>", "Git Rebase"},
-      ["’R"] =    {"<cmd> Git rebase master<CR>", "Git Rebase master"},
-      ["’s"] =    {"<cmd> Git<CR>", "Git Status"},
+      ["’r"] =    {"<cmd> G rebase<CR>", "Git Rebase"},
+      ["’R"] =    {"<cmd> G rebase master<CR>", "Git Rebase master"},
+      ["’s"] =    {"<cmd> G<CR>", "Git Status"},
       ["’S"] =    {"<cmd> Telescope git_status<CR>", "Telescope Git Status"},
       ["’t"] =    {"<cmd> diffget //2<CR>", "Git Get Left"},
       -- u
@@ -345,6 +350,21 @@ M.git = {
 -- ---------------------------------------------------------------------------
 -- Misc.
 -- ---------------------------------------------------------------------------
+-- M.nvterm = {
+--    t = {
+--       ["<C-q>"] = {
+--          function()
+--             local nvterm = require("nvterm.terminal")
+--             -- require("nvterm.terminal").close_all_terms()
+--             for _, buf in ipairs(nvterm.list_active_terms("buf")) do
+--                nvterm.get_and_hide(_)
+--             end
+--          end,
+--          "Hide All Terms",
+--       },
+--    }
+-- }
+
 M.nvim = {
    n = {
       ["<BS>"] = {"<PageUp>", "Page Up"},
@@ -358,6 +378,10 @@ M.nvim = {
    v = {
       ["Q"] = { "gq", "Wrap Text" },
    },
+   -- use CTRL-q (disabled in kitty) to escape terminal mode
+   t = {
+      ["<C-q>"] = {"<C-\\><C-n>", "Exit Terminal"},
+   }
 }
 
 -- TODO: remake insert maps with C-l
