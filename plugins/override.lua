@@ -2,8 +2,8 @@ local M = {}
 
 M.packer = {
   profile = {
-    enable = true,
-    threshold = 0.5,
+    enable = false,
+    threshold = 0.2,
   },
 }
 
@@ -40,13 +40,22 @@ M.nvimtree = {
     enable = true,
   },
   view = {
-    -- side = "right",
-    width = 20,
+    width = 37,
+    mappings = {
+      list = {
+        { key = "R", action = "first_sibling" },
+        { key = "S", action = "last_sibling" },
+        { key = "r", action = "prev_sibling" },
+        { key = "s", action = "next_sibling" },
+        { key = "<C-h>", action = "split" },
+      }
+    }
   },
 }
 
 M.bufferline = {
   options = {
+    always_show_bufferline = true,
     separator_style = "slant",
     show_buffer_close_icons = false,
     middle_mouse_command = "bdelete! %d",
@@ -113,6 +122,15 @@ M.gitsigns = {
 }
 
 M.telescope = {
+  defaults = {
+    mappings = {
+      n = {
+        ["r"] = "move_selection_previous",
+        ["s"] = "move_selection_next",
+        ["<C-h>"] = "select_horizontal",
+      },
+    },
+  },
   extensions = {
     fzf = {
       fuzzy = true,
@@ -120,12 +138,14 @@ M.telescope = {
       override_file_sorter = true,
       case_mode = "smart_case",
     },
+
     -- media_files = {
     --   -- filetypes whitelist
     --   -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
     --   filetypes = {"png", "webp", "jpg", "jpeg"},
     --   find_cmd = "rg" -- find command (defaults to `fd`)
     -- },
+
     -- ["session-lens"] = {
     --   path_display = {'shorten'},
     -- },

@@ -7,6 +7,7 @@ end
 zenmode.setup {
   window = {
     backdrop = 1,
+    width = 120,
     options = {
       signcolumn = "no",
       number = false,
@@ -21,11 +22,11 @@ zenmode.setup {
       ruler = false,
       showcmd = false,
     },
-    twilight = { enabled = true },
+    -- twilight = { enabled = true },
     gitsigns = { enabled = false },
     kitty = {
       enabled = true,
-      font = "+2",
+      font = "+1",
     },
   },
 }

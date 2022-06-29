@@ -5,20 +5,28 @@ M.setup_lsp = function(attach, capabilities)
 
    -- lspservers with default config
    local servers = {
+     -- web
       "html",
-      "bashls",
       "cssls",
-      "vuels",
+      -- "cssmodules_ls",
+      -- "vuels",
       "volar",
       "tsserver",
       "eslint",
-      "sumneko_lua",
       "vimls",
       "tailwindcss",
-      "jedi_language_server",
       "emmet_ls",
+      -- markdown
       "marksman",
-      "vls",
+      -- "vls",
+      -- lua
+      -- "sumneko_lua",
+      -- system
+      "bashls",
+      -- python
+      -- "jedi_language_server",
+      -- "pylsp",
+      "pyright",
    }
 
    for _, lsp in ipairs(servers) do
@@ -27,6 +35,19 @@ M.setup_lsp = function(attach, capabilities)
          capabilities = capabilities,
       }
    end
+
+   -- lspconfig["sumneko_lua"].setup {
+   --     on_attach = attach,
+   --     capabilities = capabilities,
+   --     settings = {
+   --         Lua = {
+   --             diagnostics = {
+   --                 globals = { 'vim' }
+   --             }
+   --         }
+   --     }
+   -- }
+
 end
 
 return M

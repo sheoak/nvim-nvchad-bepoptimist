@@ -50,110 +50,13 @@ M.disabled = {
 
 M.bepo = require "custom.mappings-bepo"
 
-M.camelcase = {
-   n = {
-      ["ç"]  = {"<Plug>CamelCaseMotion_w", "CamelCase ->" },
-      ["Ç"]  = {"<Plug>CamelCaseMotion_e", "CamelCase -> (inclusive)" },
-      ["gç"] = {"<Plug>CamelCaseMotion_ge", "CamelCase <-" },
-      ["gÇ"] = {"<Plug>CamelCaseMotion_b", "CamelCase <- (inclusive)" },
-   },
-   v = {
-      ["ç"]  = {"<Plug>CamelCaseMotion_w", "CamelCase ->" },
-      ["Ç"]  = {"<Plug>CamelCaseMotion_e", "CamelCase -> (inclusive)" },
-      ["gç"] = {"<Plug>CamelCaseMotion_ge", "CamelCase <- " },
-      ["gÇ"] = {"<Plug>CamelCaseMotion_b", "CamelCase <- (inclusive)" },
-   },
-   o = {
-      -- CamelCase text-objects (ç)
-      ["ç"]  = {"<Plug>CamelCaseMotion_w", "CamelCase Text-Object ->" },
-      ["Ç"]  = {"<Plug>CamelCaseMotion_e", "CamelCase Text-Object -> (before)" },
-      -- usefull?
-      ["gç"] = {"<Plug>CamelCaseMotion_ge", "CamelCase Text-Object <-" },
-      ["aç"] = {"<Plug>CamelCaseMotion_iw", "CamelCase Ambiant Text-Object" },
-      ["iç"] = {"<Plug>CamelCaseMotion_ib", "CamelCase Inner Text-Object" },
-      -- usefull?
-      ["gÇ"] = {"<Plug>CamelCaseMotion_b", "CamelCase Text-Object Outside" },
-   },
-   x = {
-      ["ç"]  = {"<Plug>CamelCaseMotion_w", ""},
-      ["Ç"]  = {"<Plug>CamelCaseMotion_e", ""},
-      ["gç"] = {"<Plug>CamelCaseMotion_ge", ""},
-      ["gÇ"] = {"<Plug>CamelCaseMotion_b", ""},
-      ["aç"] = {"<Plug>CamelCaseMotion_iw", ""},
-      ["iç"] = {"<Plug>CamelCaseMotion_ib", ""},
-   }
-}
-
-M.unimpaired = {
-   n = {
-      ["«"] = {"[", "", opts = { noremap = false }},
-      ["»"] = {"]", "", opts = { noremap = false }},
-   },
-   o = {
-      ["«"] = {"[", "", opts = { noremap = false }},
-      ["»"] = {"]", "", opts = { noremap = false }},
-   },
-   x = {
-      ["«"] = {"[", "", opts = { noremap = false }},
-      ["»"] = {"]", "", opts = { noremap = false }},
-   },
-}
-
-M.leap = {
-   n = {
-      ["k"] = {"<Plug>(leap-forward)", "Leap Forward"},
-      ["K"] = {"<Plug>(leap-backward)", "Leap Backward"},
-      ["è"] = {"<Plug>(leap-forward-x)", "Leap Forward, inclusive"},
-      ["È"] = {"<Plug>(leap-backward-x)", "Leap Backward, inclusive"},
-      ["gk"] = {"<Plug>(leap-cross-window)", "Leap Forward"},
-   },
-   v = {
-      ["k"] = {"<Plug>(leap-forward)", "Leap Forward"},
-      ["K"] = {"<Plug>(leap-backward)", "Leap Backward"},
-      ["è"] = {"<Plug>(leap-forward-x)", "Leap Forward, inclusive"},
-      ["È"] = {"<Plug>(leap-backward-x)", "Leap Backward, inclusive"},
-   },
-   o = {
-      ["k"] = {"<Plug>(leap-forward)", "Leap Forward"},
-      ["K"] = {"<Plug>(leap-backward)", "Leap Backward"},
-      ["è"] = {"<Plug>(leap-forward-x)", "Leap Forward, inclusive"},
-      ["È"] = {"<Plug>(leap-backward-x)", "Leap Backward, inclusive"},
-   },
-}
-
-M.surround = {
-   n = {
-      ["du"]  = {"<Plug>Dsurround", "Surround Delete"},
-      ["cu"]  = {"<Plug>Csurround", "Surround Replace"},
-      ["cU"]  = {"<Plug>CSurround", "Surround Replace (inc.)"},
-      ["yu"]  = {"<Plug>Ysurround", "Surround Yank"},
-      ["yU"]  = {"<Plug>YSurround", "Surround Yank (inc.)"},
-      ["yuu"] = {"<Plug>Yssurround", "Surround Yank ?"},
-      ["yuU"] = {"<Plug>YSsurround", "Surround Yank ?"},
-   },
-   x = {
-      ["u"] = { "<Plug>VSurround", "Add around"},
-      ["U"] = { "<Plug>VgSurround", "Add around, linewise" },
-   }
-}
-
 -- END BEPO
 
-M.treesitter = {
-   n = {
-      ["<leader>cu"] = { "<cmd> TSCaptureUnderCursor <CR>", "  find media" },
-   },
-}
-
-M.neoclip = {
-   n = {
-      ['""'] = {
-         -- FIXME
-         "<cmd> lua require('telescope').extensions.neoclip.default()<CR>",
-         "Neoclip",
-      },
-   },
-}
+-- M.treesitter = {
+--    n = {
+--       ["<leader>cu"] = { "<cmd> TSCaptureUnderCursor <CR>", "  find media" },
+--    },
+-- }
 
 -- ---------------------------------------------------------------------------
 -- <LEADER>… Misc. plugins commands
@@ -167,7 +70,7 @@ M.alpha = {
    },
 }
 
-M.startify = {
+M.autosession = {
    n = {
       ["<leader>s"] = { "", "Session…"},
       ["<leader>sw"] = { "<cmd> SaveSession<CR>", "Save Session" },
@@ -200,17 +103,6 @@ M.packer = {
 M.ui = {
    n = {
       ["<leader>z"] = {"<cmd> ZenMode<CR>", "ZenMode Toggle"},
-   }
-}
-
-M.colors = {
-   n = {
-      ["<leader>cR"] = { "<cmd> ConvertColorTo rgb<CR>", "Convert to RGB"},
-      ["<leader>cA"] = { "<cmd> ConvertColorTo rgba<CR>", "Convert to RGBA"},
-      ["<leader>cH"] = { "<cmd> ConvertColorTo hex<CR>", "Convert to #hex"},
-      ["<leader>cr"] = { "<cmd> VCoolIns r<CR>", "Color Picker RGB"},
-      ["<leader>ca"] = { "<cmd> VCoolIns ra<CR>", "Color Picker RGBA"},
-      ["<leader>ch"] = { "<cmd> VCoolor<CR>", "Color Picker #hex"},
    }
 }
 
@@ -331,8 +223,9 @@ M.git = {
       ["’m"] =    {"<cmd> G merge<CR>", "Git Merge"},
       ["’n"] =    {"<cmd> diffget //3<CR>", "Git Get Right"},
       ["’o"] =    {"<Plug>(git-messenger)", "Git Messenger"},
-      ["’p"] =    {"<cmd> G push<CR>", "Git Push"},
-      ["’P"] =    {"<cmd> G! push<CR>", "Git Push Async"},
+      ["’p"] =    {"<cmd> G! push<CR>", "Git Push"},
+      ["’fp"] =    {"<cmd> G! push -f<CR>", "Git Push -f"},
+      ["’P"] =    {"<cmd> G! push -f --with-lease<CR>", "Git Push -f With Lease"},
       -- q
       ["’r"] =    {"<cmd> G rebase<CR>", "Git Rebase"},
       ["’R"] =    {"<cmd> G rebase master<CR>", "Git Rebase master"},
@@ -375,12 +268,31 @@ M.nvim = {
    x = {
       ["p"] = { "pgvy", "Paste without override register" }
    },
+   i = {
+     ["<C-l>"] = {"<C-x><C-l>", "Complete Line"},
+   },
    v = {
       ["Q"] = { "gq", "Wrap Text" },
    },
    -- use CTRL-q (disabled in kitty) to escape terminal mode
    t = {
-      ["<C-q>"] = {"<C-\\><C-n>", "Exit Terminal"},
+      ["<C-s>"] = {"<C-\\><C-n>", "Exit Terminal"},
+   }
+}
+
+M.convertcolor = {
+   n = {
+      ["<leader>cR"] = { "<cmd> ConvertColorTo rgb<CR>", "Convert to RGB"},
+      ["<leader>cA"] = { "<cmd> ConvertColorTo rgba<CR>", "Convert to RGBA"},
+      ["<leader>cH"] = { "<cmd> ConvertColorTo hex<CR>", "Convert to #hex"},
+   }
+}
+
+M.vcoolor = {
+   n = {
+      ["<leader>cr"] = { "<cmd> VCoolIns r<CR>", "Color Picker RGB"},
+      ["<leader>ca"] = { "<cmd> VCoolIns ra<CR>", "Color Picker RGBA"},
+      ["<leader>ch"] = { "<cmd> VCoolor<CR>", "Color Picker #hex"},
    }
 }
 
