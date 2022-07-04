@@ -8,6 +8,7 @@ M.setup_lsp = function(attach, capabilities)
      -- web
       "html",
       "cssls",
+      "jsonls",
       -- "cssmodules_ls",
       -- "vuels",
       "volar",

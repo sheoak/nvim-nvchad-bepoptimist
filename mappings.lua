@@ -296,6 +296,24 @@ M.vcoolor = {
    }
 }
 
+local action = require("lspsaga.codeaction")
+
+M.lspsaga = {
+  n = {
+    ["<CR>a"] = { action.code_action, "Code Action", opts = { silent = true, noremap = true } },
+  },
+  -- v = {
+  --   ["<CR>a"] = {
+  --     function()
+  --       vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
+  --       action.range_code_action()
+  --     end,
+  --     "Code Action",
+  --     opts = { silent = true,noremap =true },
+  --   },
+  -- },
+}
+
 -- TODO: remake insert maps with C-l
 -- inoremap <C-j> <C-x><C-]>
 -- inoremap <C-o> <C-x><C-o>

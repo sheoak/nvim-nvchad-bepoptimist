@@ -51,7 +51,7 @@ M.options = {
      vim.opt.backupskip="/tmp/*,$HOME/backups/*,*.tmp/*,*.cache/*"
      vim.opt.undodir="$HOME/.local/share/nvim/undo//,$HOME/.backups/undo//,/tmp/undo//"
 
-     vim.opt.guifont="FuraMono Nerd Font Mono:h12"
+     vim.opt.guifont="FuraMono Nerd Font Mono:h14"
    end,
 }
 

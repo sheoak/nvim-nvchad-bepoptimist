@@ -44,10 +44,6 @@ local old = {
     ft={'lua'}
   },
 
-  ["jelera/vim-javascript-syntax"] = {
-    ft={'javascript'}
-  },
-
   ["elzr/vim-json"] = {
     ft={'json'}
   },
