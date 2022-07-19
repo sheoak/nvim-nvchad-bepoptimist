@@ -43,15 +43,20 @@ M.options = {
      vim.opt.colorcolumn="120"
      vim.opt.scrolloff=6
      vim.opt.sidescrolloff=5
+     -- show hidden chars
      vim.opt.list=true
      vim.opt.listchars="nbsp:·,trail:¤,tab:\\ \\"
+     -- wrapping lines without breaking words
+     vim.opt.linebreak = true
+     -- we remove "-" from default breakat
+     vim.opt.breakat = "^I!@*+;:,./?"
 
      vim.opt.backupdir="$HOME/.local/share/nvim/backups,$HOME/.backups/,/tmp/"
      vim.opt.directory="$HOME/.local/share/nvim/swap//,$HOME/.backups//,/tmp//"
      vim.opt.backupskip="/tmp/*,$HOME/backups/*,*.tmp/*,*.cache/*"
      vim.opt.undodir="$HOME/.local/share/nvim/undo//,$HOME/.backups/undo//,/tmp/undo//"
 
-     vim.opt.guifont="FuraMono Nerd Font Mono:h14"
+     vim.opt.guifont="FuraMono Nerd Font Mono:h12"
    end,
 }
 

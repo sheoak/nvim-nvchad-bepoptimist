@@ -23,6 +23,13 @@ autocmd("BufEnter", {
     end,
 })
 
+-- autocmd("FileType", {
+--     pattern = "javascript",
+--     callback = function()
+--         vim.opt_local.formatprg = "prettier --stdin"
+--     end,
+-- })
+
 -- Spell configuration
 -- if has("spell")
 --     augroup spell
@@ -66,8 +73,6 @@ autocmd("BufEnter", {
 --     au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 --     au FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 --     au FileType java          setlocal omnifunc=javacomplete#Complete
---     au FileType javascript    setlocal formatprg=prettier\ --stdin
---     au FileType typescript    setlocal formatprg=prettier\ --stdin
 --     " formating by types
 --     au FileType text          setlocal tw=78 fo+=t cole=0
 --     au FileType markdown      setlocal tw=80 fo+=t cole=0
