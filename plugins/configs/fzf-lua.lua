@@ -99,8 +99,8 @@ fzflua.setup {
     },
   },
   files = {
-    rg_opts = "--color=never --files --hidden --no-ignore-vcs --follow -g '!.git'",
-    fd_opts = "--color=never --type f --hidden --no-ignore-vcs --follow --exclude .git",
+    rg_opts = "--color=never --files --hidden --follow -g '!.git'",
+    fd_opts = "--color=never --type f --hidden --follow --exclude .git",
     fzf_opts = {
       ["--keep-right"]  = '',
     },

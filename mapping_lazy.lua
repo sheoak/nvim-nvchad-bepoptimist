@@ -78,5 +78,21 @@ M.neoclip = {
   }
 }
 
+M.lspsaga = {
+  -- n = {
+  --   ["<CR>a"] = { require("lspsaga.codeaction").code_action, "Code Action", opts = { silent = true, noremap = true } },
+  -- },
+  -- v = {
+  --   ["<CR>a"] = {
+  --     function()
+  --       vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
+  --       action.range_code_action()
+  --     end,
+  --     "Code Action",
+  --     opts = { silent = true,noremap =true },
+  --   },
+  -- },
+}
+
 return M
 

@@ -69,7 +69,7 @@ M.plugins = {
     },
   },
 
-   user = require "custom.plugins",
+  user = require "custom.plugins",
 
   override = {
     ["wbthomason/packer.nvim"] = override.packer,

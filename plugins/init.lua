@@ -42,15 +42,15 @@ return {
   },
 
   -- Session from telescope (auto-session)
-  ["rmagatti/session-lens"] = {
-    requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
-    cmd = "SearchSession",
-    config = function()
-      require('session-lens').setup {
-        path_display = {'shorten'},
-      }
-    end
-  },
+  -- ["rmagatti/session-lens"] = {
+  --   requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+  --   cmd = "SearchSession",
+  --   config = function()
+  --     require('session-lens').setup {
+  --       path_display = {'shorten'},
+  --     }
+  --   end
+  -- },
 
   -- Telescope clipboard
   ["AckslD/nvim-neoclip.lua"] = {
@@ -69,14 +69,14 @@ return {
   },
 
   -- Easier session management
-  ["rmagatti/auto-session"] = {
-    config = function()
-      require('auto-session').setup {
-        -- log_level = 'info',
-        auto_session_suppress_dirs = {'~/', '~/Projects'}
-      }
-    end
-  },
+  -- ["rmagatti/auto-session"] = {
+  --   config = function()
+  --     require('auto-session').setup {
+  --       log_level = 'error',
+  --       auto_session_suppress_dirs = {'~/', '~/Projects'}
+  --     }
+  --   end
+  -- },
 
   -- Respect editorconfig file
   ["editorconfig/editorconfig-vim"] = {
@@ -234,6 +234,34 @@ return {
     ft={"i3config"},
   },
 
+  ["digitaltoad/vim-pug"] = {
+    ft = {'vue', 'pug'}
+  },
+
+  -- ["posva/vim-vue"] = {
+  --   ft = {'js', 'vue'},
+  --   -- setup = function()
+  --   --   vim.g.vue_pre_processors = 'detect_on_enter'
+  --   -- end,
+  --   config = function()
+  --     vim.g.vue_pre_processors = { 'pug', 'scss', 'typescript' }
+  --   end
+  -- },
+
+  ["leafOfTree/vim-vue-plugin"] = {
+    config = function()
+      vim.g.vim_vue_plugin_config = {
+        debug = 0,
+        syntax = {
+          template = { "html", "pug" },
+          script = { "javascript", "typescript" },
+          style = { "css", "scss" },
+          i18n = { "json", "yaml" },
+        },
+      }
+    end
+  },
+
   -- -------------------------------------------------------------------------
   -- UI
   -- -------------------------------------------------------------------------
@@ -290,10 +318,22 @@ return {
   ["glepnir/lspsaga.nvim"] = {
     config = function()
       local saga = require("lspsaga")
+      local utils = require 'core.utils'
+      local maps = require 'custom.mapping_lazy'.lspsaga
+
       saga.init_lsp_saga({
         -- your configuration
       })
+
+      utils.load_mappings({ maps })
     end,
   },
+
+   -- ["jose-elias-alvarez/null-ls.nvim"] = {
+   --    after = "nvim-lspconfig",
+   --    config = function()
+   --       require "custom.plugins.null-ls"
+   --    end,
+   -- }
 
 }

@@ -15,7 +15,7 @@ M.setup_lsp = function(attach, capabilities)
       -- "vuels",
       "volar",
       "tsserver",
-      "eslint",
+      -- "eslint",
       "vimls",
       "emmet_ls",
       -- markdown
@@ -25,10 +25,10 @@ M.setup_lsp = function(attach, capabilities)
       -- "sumneko_lua",
       -- system
       "bashls",
-      -- python
-      -- "jedi_language_server",
-      -- "pylsp",
-      "pyright",
+      -- "python",
+      "jedi_language_server",
+      "pylsp",
+      -- "pyright",
    }
 
    for _, lsp in ipairs(servers) do
@@ -38,6 +38,13 @@ M.setup_lsp = function(attach, capabilities)
       }
    end
 
+   lspconfig["pylsp"].setup {
+     filetypes = {"python"},
+     settings = {
+       configurationSources = {"flake8"},
+       formatCommand = {"black"}
+     }
+   }
    -- lspconfig["sumneko_lua"].setup {
    --     on_attach = attach,
    --     capabilities = capabilities,

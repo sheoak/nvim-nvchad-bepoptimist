@@ -15,3 +15,5 @@ vim.g.python_host_prog="$HOME/.virtualenvs/neovim2/bin/python"
 vim.g.python3_host_prog="$HOME/.virtualenvs/neovim3/bin/python"
 
 -- let $GIT_EDITOR = 'nvr -cc split --remote-wait'
+vim.g.do_filetype_lua = true
+vim.g.did_load_filetypes = false
